@@ -1,0 +1,40 @@
+class Cadeau:
+   
+    def __init__(self, posX, posY, taille, couleur,couleur2,couleur3,couleur4):
+        self.posX = posX
+        self.posY = posY
+        self.taille = taille
+        self.couleur = couleur
+        self.couleur2 = couleur2
+        self.couleur3 =couleur3
+        self.couleur4= couleur4
+   
+    def dess(self):
+        translate(self.posX, self.posY)  # Applique la translation à la position du personnage
+        scale(self.taille)  # Applique l'échelle
+        fill(self.couleur)
+        stroke(0)
+        strokeWeight(4)
+        fill(self.couleur2)  # Couleur rouge pour le cadeau
+        rect(100, 100, 200, 200)  # Dessiner le corps du cadeau au centre de la fenêtre
+
+
+        fill(self.couleur3)# Couleur verte pour le ruban
+        strokeWeight(5)
+        line(200, 100, 200, 300)  # Ruban horizontal au centre
+        line(100, 200, 300, 200)  # Ruban vertical au centre
+
+        fill(self.couleur4)# Couleur noire pour le noeud
+        stroke(0,255,0)
+        strokeWeight(4)
+        ellipse(165, 85, 70, 30)  # Noeud du cadeau au centre
+        ellipse(235,85,70,30)
+       
+def setup():
+    createCanvas(800, 600)  # Définir la taille de la fenêtre    
+    global cadeau  # Déclare la variable cadeau comme globale
+    cadeau = Cadeau(200, 200, 0.2, (255),(255,0,0),(0),(0))
+   
+def draw():
+    background(255)  # Remplir l'arrière-plan en blanc
+    cadeau.dess()# Dessine le personnage à sa nouvelle position
