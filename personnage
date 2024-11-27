@@ -1,0 +1,54 @@
+class Personnage:
+    def __init__(self, posX, posY, taille, couleur, vitX=0,vitY=0):
+        self.posX = posX
+        self.posY = posY
+        self.taille = taille
+        self.couleur = couleur
+        self.vitX = vitX
+        self.vitY = vitY
+        self.solY = posY  # Position du sol
+           
+    def dessine(self):
+        translate(self.posX, self.posY)  # Applique la translation à la position du personnage
+        scale(self.taille)  # Applique l'échelle
+        fill(self.couleur)  # Remplit avec la couleur définie
+        stroke(0)
+        strokeWeight(3)
+        ellipse(200, 100, 50, 50)  # Cercle pour la tête
+        # Corps
+        line(200, 125, 200, 250)  # Ligne pour le corps
+        # Bras
+        line(150, 175, 250, 175)  # Ligne pour les bras
+        # Jambes
+        line(200, 250, 170, 350)  # Jambe gauche
+        line(200, 250, 230, 350)  # Jambe droite
+       
+   
+    def bouge(self):
+        self.posX += self.vitX
+        self.posY +=self.vitY
+        if  keyIsPressed:
+            if key == '1':
+                self.posX -= 5 # Va à gauche
+            elif key == '2':
+                self.posX += 5 # Va à droite
+               
+    def saut (self):
+        if keyIsPressed:
+             if key == '0' and self.posY == self.solY:  # Saut uniquement si au sol
+                    self.vitY = -15 # Vitesse initiale pour le saut
+        self.vitY += 1  # Gravité (augmente la vitesse vers le bas)
+        self.posY += self.vitY  # Applique la vitesse verticale
+        if self.posY >= self.solY:  # Arrêt au sol
+            self.posY = self.solY
+            self.vitY = 0
+def setup():
+    createCanvas(800, 600)  # Définir la taille de la fenêtre    
+    global personnage  # Déclare la variable personnage comme globale
+    personnage = Personnage(30, 530, 0.2, (255))  # Crée un personnage
+
+def draw():
+    background(255)  # Remplir l'arrière-plan en blanc
+    personnage.dessine()# Dessine le personnage à sa nouvelle position
+    personnage.bouge()
+    personnage.saut() # fait bouger le personnage 120
